@@ -1,0 +1,2 @@
+-Cambiar el nombre de los Rangos.
+-Cambiar el nombre de los archivos de texto asociados a los rangos.
