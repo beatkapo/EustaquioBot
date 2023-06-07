@@ -1,2 +1,3 @@
 -Cambiar el nombre de los Rangos.
 -Cambiar el nombre de los archivos de texto asociados a los rangos.
+-/contratar debe comprobar si el usuario ya forma parte de la plantilla
