@@ -7,14 +7,14 @@ const client = new Client({
 const fs = require('fs');
 const botOwnerId = 'beatkapo'; // Reemplaza con tu ID de usuario
 const requiredRole = 'Propietario'; // Reemplaza con el nombre del rol requerido
-const workerRanks = ['Ayudante', 'Mozo', 'Ranchero']; // Reemplaza con los rangos de trabajador en orden ascendente
+const workerRanks = ['Ayudante', 'Mozo', 'Guardia', 'Ranchero']; // Reemplaza con los rangos de trabajador en orden ascendente
 
 client.on('ready', () => {
   console.log(`Conectado como ${client.user.tag}`);
 });
 
 client.on('messageCreate', async (message) => {
-  
+
   if (message.content.startsWith('/contratar')) {
     // Verificar si el autor del mensaje es el propietario del bot o tiene el rol requerido
     if (!message.member.roles.cache.some((role) => role.name === requiredRole)) {
@@ -102,7 +102,7 @@ client.on('messageCreate', async (message) => {
       const contenidoTexto = fs.readFileSync(archivoTexto, 'utf8');
 
       // Construir el mensaje para el usuario ascendido
-      const mensajeAscenso = `¡Felicitaciones! Has sido ascendido a ${nextRank}.\n\n${contenidoTexto}`;
+      const mensajeAscenso = `¡Felicitaciones! Has sido ascendido a ${contenidoTexto}`;
       userMember.send(mensajeAscenso);
       // Responder en el canal de texto indicando el ascenso del usuario
       message.channel.send(`Se ha ascendido a ${message.guild.members.cache.get(userToPromote.id).displayName} al rango ${nextRank}.`);
@@ -140,6 +140,14 @@ client.on('messageCreate', async (message) => {
         return message.reply('No se puede descender más al usuario, prueba con "/despedir @usuario razón"');
       }
       const prevRank = workerRanks[prevRankIndex];
+      const archivoTexto = `${prevRank.toLowerCase()}.txt`;
+
+      // Leer el contenido del archivo de texto correspondiente
+      const contenidoTexto = fs.readFileSync(archivoTexto, 'utf8');
+
+      // Construir el mensaje para el usuario ascendido
+      const mensajeAscenso = `Vaya, no se que habrás hecho pero has sido descendido a ${contenidoTexto}`;
+      userMember.send(mensajeAscenso);
 
       // Obtener el rol correspondiente al siguiente rango
       const prevRankRole = message.guild.roles.cache.find(role => role.name === prevRank);
