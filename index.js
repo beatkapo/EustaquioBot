@@ -33,7 +33,6 @@ client.on('messageCreate', async (message) => {
     // if (hasAllowedRole) {
     //   message.reply(`El usuario ya forma parte de la plantilla.`);
     // } 
-
     try {
       // Obtener el rol que deseas asignar al usuario
       const roleToAssign = message.guild.roles.cache.find((role) => role.name === workerRanks[0]);
